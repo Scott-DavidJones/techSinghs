@@ -100,20 +100,26 @@ class TechSinghs
     /**
      * Send a request for a single IMEI
      */
-    public function checkSingleImei(string $imei): stdClass
+    public function checkSingleImei(string $imei, int $serviceId = null): stdClass
     {
         $request = new OrderRequest;
         $request->setImei($imei);
+        if (null !== $serviceId) {
+            $request->setServiceId($serviceId);
+        }
 
         return $this->makePostRequest(self::API_ORDERS_ENDPOINT, $request);
     }
     /**
      * Initiates a batch request
      */
-    public function initiateImeiBatch(array $imeis): stdClass
+    public function initiateImeiBatch(array $imeis, int $serviceId = null): stdClass
     {
         $request = new BatchRequest;
         $request->setImeiList($imeis);
+        if (null !== $serviceId) {
+            $request->setServiceId($serviceId);
+        }
 
         return $this->makePostRequest(self::API_BATCH_ENDPOINT, $request);
     }
