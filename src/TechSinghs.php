@@ -13,11 +13,11 @@ use stdClass;
 
 class TechSinghs
 {
-    const API_BASE_URL          = 'https://api.techsinghs.com';
-    const API_BATCH_ENDPOINT    = 'BatchOrders';
-    const API_ORDERS_ENDPOINT   = 'orders';
-    const API_ACCOUNT_ENDPOINT  = 'Users/me';
-    const API_SERVICES_ENDPOINT = 'Services';
+    public const API_BASE_URL          = 'https://api.techsinghs.com';
+    public const API_BATCH_ENDPOINT    = 'BatchOrders';
+    public const API_ORDERS_ENDPOINT   = 'orders';
+    public const API_ACCOUNT_ENDPOINT  = 'Users/me';
+    public const API_SERVICES_ENDPOINT = 'Services';
 
     private $guzzleClient;
 
@@ -87,7 +87,7 @@ class TechSinghs
         }
 
         if (null !== $batchId) {
-            $endpoint .= "/{$batchId}";
+            $endPoint .= "/{$batchId}";
         }
         $response = $this->getClient()->get($endPoint, [
             'headers'       => $this->headers,
@@ -102,7 +102,7 @@ class TechSinghs
      */
     public function checkSingleImei(string $imei, int $serviceId = null): stdClass
     {
-        $request = new OrderRequest;
+        $request = new OrderRequest();
         $request->setImei($imei);
         if (null !== $serviceId) {
             $request->setServiceId($serviceId);
@@ -115,7 +115,7 @@ class TechSinghs
      */
     public function initiateImeiBatch(array $imeis, int $serviceId = null): stdClass
     {
-        $request = new BatchRequest;
+        $request = new BatchRequest();
         $request->setImeiList($imeis);
         if (null !== $serviceId) {
             $request->setServiceId($serviceId);
