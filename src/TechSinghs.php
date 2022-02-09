@@ -70,7 +70,12 @@ class TechSinghs
             'headers'       => $this->headers,
         ]);
 
-        return json_decode($response->getBody());
+        $body = $response->getBody();
+        if ($body->isSeekable()) {
+            $body->rewind();
+        }
+
+        return \json_decode($body->getContents());
     }
 
     /**
@@ -93,7 +98,12 @@ class TechSinghs
             'headers'       => $this->headers,
         ]);
 
-        return json_decode($response->getBody());
+        $body = $response->getBody();
+        if ($body->isSeekable()) {
+            $body->rewind();
+        }
+
+        return \json_decode($body->getContents());
     }
 
 
